@@ -3,24 +3,19 @@ author: 'Dmitry Rozhdestvenskiy <yellowmegaman@gmail.com>'
 description: 'gha k3s'
 branding:
   icon: 'aperture'
-  color: ''
+  color: 'yellow'
 inputs:
   k3s_tag:
     description: "k3s tag to use"
     required: false
     default: 'v1.17.4-k3s1'
-  runner_hostname:
-    description: "action container wants to know"
-    required: true
   custom_registry:
-    description: "whenever to use registries.yaml or not"
+    description: "whenever to use registries.yaml in your repo or not"
     required: true
   parent_workspace:
-    description: "what value to provide for volumes"
+    description: "this value is used to mount your registries.yaml file"
     required: false
     default: ${{github.workspace}}
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  env:
-    GITHUB_TOKEN: ${{inputs.github_token}}
