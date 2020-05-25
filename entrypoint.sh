@@ -10,6 +10,9 @@ whoami
 
 docker run -d --name=k3s --privileged --tmpfs /run --tmpfs /var/run -p 6443:6443 -p 80:80 -v "$PWD"/k3s.yaml:/etc/rancher/k3s/k3s.yaml -v "$PWD"/registries.yaml:/etc/rancher/k3s/registries.yaml rancher/k3s:$INPUT_K3S_TAG server
 
+sleep 5
+netstat -plunt
+
 nslookup k3s
 nc -zv k3s 6443
 
