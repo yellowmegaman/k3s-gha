@@ -1,5 +1,10 @@
 #!/bin/bash -e
 
+### install kubectl
+curl -L -s --create-dirs https://storage.googleapis.com/kubernetes-release/release/"$INPUT_KUBECTL_VERSION"/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl
+chmod +x /usr/local/bin/kubectl
+
+
 export KUBECONFIG=k3s.yaml
 export RUNNER_HOSTNAME=$(docker info --format '{{lower .Name}}')
 
@@ -10,7 +15,7 @@ sleep 15
 docker cp k3s:/etc/rancher/k3s/k3s.yaml .
 sed -i "s/127.0.0.1/$RUNNER_HOSTNAME/g" k3s.yaml
 
-echo 'wait for k3s'
+### 'wait for k3s'
 for attempt in {1..60}; do
 	if kubectl version; then
 		break;
@@ -20,7 +25,7 @@ for attempt in {1..60}; do
 	fi
 done
 
-echo 'wait for traefik is READY'
+### 'wait for traefik is READY'
 for attempt in {1..60}; do
 	if kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready | grep true | grep '^traefik'; then
 		break
@@ -31,8 +36,7 @@ for attempt in {1..60}; do
 	fi
 done
 
-echo 'wait for coredns is READY'
-
+### 'wait for coredns is READY'
 for attempt in {1..60}; do
 	if kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready | grep true | grep '^coredns'; then
 		break
@@ -45,12 +49,12 @@ for attempt in {1..60}; do
 done
 
 
-echo 'get all resources'
+### 'get all resources'
 kubectl get all --all-namespaces
 
 chmod a+r k3s.yaml
 
-### copy kubectl over
+### 'copy kubectl over'
 
 if [ "$INTPUT_INSTALL_KUBECTL" = true ]; then
 	mkdir bin

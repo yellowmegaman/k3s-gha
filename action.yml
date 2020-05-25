@@ -27,5 +27,3 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - KUBECTL_VERSION: ${{inputs.kubectl_version}}
