@@ -11,5 +11,6 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositor
   chmod +x /usr/local/bin/kubectl
 
 ADD entrypoint.sh /
+ADD registries.yaml /
 
 ENTRYPOINT ["/entrypoint.sh"]
