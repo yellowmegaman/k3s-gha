@@ -4,27 +4,11 @@ export KUBECONFIG=k3s.yaml
 
 touch k3s.yaml
 
-echo $INPUT_RUNNER_HOSTNAME
-pwd
-ls
-whoami
-
-nslookup $INPUT_RUNNER_HOSTNAME
-
 docker run -d --name=k3s --privileged --tmpfs /run --tmpfs /var/run -p 6443:6443 -p 80:80 -v "$PWD"/k3s.yaml:/etc/rancher/k3s/k3s.yaml -v "$PWD"/registries.yaml:/etc/rancher/k3s/registries.yaml rancher/k3s:$INPUT_K3S_TAG server
 
-docker ps
-
-echo '#######################################'
-docker inspect k3s
-echo '#######################################'
-
-
 sleep 5
-netstat -plunt
 
-nslookup k3s
-nc -zv k3s 6443
+sed -i "s/127.0.0.1/$INPUT_RUNNER_HOSTNAME/g" k3s.yaml
 
 echo 'wait for k3s'
 for attempt in {1..60}; do
