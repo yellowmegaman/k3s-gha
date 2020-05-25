@@ -5,19 +5,7 @@ export KUBECONFIG=k3s.yaml
 cp /registries.yaml .
 touch k3s.yaml
 
-echo '##############'
-pwd
-echo '##############'
-
-ls
-
-du -sh registries.yaml
-
-echo '#################'
-
-#docker run -d --name=k3s --privileged --tmpfs /run --tmpfs /var/run -p 6443:6443 -p 80:80 -v "$PWD"/k3s.yaml:/etc/rancher/k3s/k3s.yaml -v "$PWD"/registries.yaml:/etc/rancher/k3s/registries.yaml rancher/k3s:$INPUT_K3S_TAG server
-
-docker run -d --name=k3s --privileged --tmpfs /run --tmpfs /var/run -p 6443:6443 -p 80:80 -v "$PWD"/k3s.yaml:/etc/rancher/k3s/k3s.yaml --mount 'type=bind,src=/home/yellowmegaman/za2dp.sh,dst=/eba.sh'
+docker run -d --name=k3s --privileged --tmpfs /run --tmpfs /var/run -p 6443:6443 -p 80:80 -v /github/workspace/k3s.yaml:/etc/rancher/k3s/k3s.yaml --mount 'type=bind,src=/github/workspace/registries.yaml,dst=/etc/rancher/k3s/registries.yaml' rancher/k3s:$INPUT_K3S_TAG server
 
 sleep 30
 
