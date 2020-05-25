@@ -8,6 +8,7 @@ LABEL \
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
   apk add --no-cache git hub curl jq bash docker
 
-ADD *.sh /
+ADD entrypoint.sh /
+ADD registries.yaml /
 
 ENTRYPOINT ["/entrypoint.sh"]

@@ -5,9 +5,10 @@ branding:
   icon: 'aperture'
   color: ''
 inputs:
-  somshit:
-    description: "som"
+  k3s_tag:
+    description: "k3s tag to use"
     required: false
+    default: 'v1.17.4-k3s1'
 runs:
   using: 'docker'
   image: 'Dockerfile'
