@@ -8,10 +8,19 @@ A GitHub Action for running k3s kubernetes cluster
  * Action is launching k3s container and some checks to ensure kubernetes is up and running
  * Optionally (by default, but can be turned off) installs kubectl (copies over) to enable hassle-free k8s interaction
 
+## Optional Input parameters
+ * k3s_tag - k3s tag to use. (can be found at https://hub.docker.com/r/rancher/k3s/tags)
+ * parent_workspace - workspace path on runner, obtainer from context, no need to specify anything here, except you know what you're doing
+ * kubectl_version
+ * install_kubectl - enabled by default, copies kubectl to bin dir in workspace to allow other steps to use kubectl
+
+## Required parameters
+ * custom_registry - set to 'true' to mount your `registries.yaml` to k3s. This will allow to use private registry mapping in k3s. (set to `false` if you don't have such needs)
+ 
 ### GitHub Actions
 ```
 # File: .github/workflows/ci.yml
-name: CI
+name: k3s
 on:
   push:
     branches:
@@ -20,8 +29,8 @@ on:
 env:
   KUBECONFIG: k3s.yaml
 jobs:
-  lint:
-    name: lint
+  k3s:
+    name: k3s
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
