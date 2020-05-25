@@ -2,6 +2,10 @@
 
 export KUBECONFIG=k3s.yaml
 
+echo '#######################'
+echo $INPUT_PARENT_WORKSPACE
+echo '#######################'
+
 cp /registries.yaml .
 touch k3s.yaml
 

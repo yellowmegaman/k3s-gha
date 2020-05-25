@@ -15,6 +15,10 @@ inputs:
   custom_registry:
     description: "whenever to use registries.yaml or not"
     required: true
+  parent_workspace:
+    description: "what value to provide for volumes"
+    required: true
+    default: ${{github.workspace}}
 runs:
   using: 'docker'
   image: 'Dockerfile'
