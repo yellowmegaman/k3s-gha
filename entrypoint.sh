@@ -49,3 +49,8 @@ echo 'get all resources'
 kubectl get all --all-namespaces
 
 chmod a+r k3s.yaml
+
+
+echo '########'
+docker info
+echo '########'
