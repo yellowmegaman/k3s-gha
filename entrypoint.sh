@@ -52,5 +52,5 @@ chmod a+r k3s.yaml
 
 
 echo '########'
-docker info
+docker info --format '{{lower .Name}}'
 echo '########'
