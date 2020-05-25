@@ -13,7 +13,7 @@ sed -i "s/127.0.0.1/$INPUT_RUNNER_HOSTNAME/g" k3s.yaml
 echo 'wait for k3s'
 for attempt in {1..60}; do
 	if kubectl version; then
-		exit;
+		break;
 	else
 		echo "k3s is not yet up"
 		sleep 3
@@ -23,7 +23,7 @@ done
 echo 'wait for traefik is READY'
 for attempt in {1..60}; do
 	if kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready | grep true | grep '^traefik'; then
-		exit
+		break
 	elif [ "$attempt" -eq 60 ]; then
 		exit 1
 	else
@@ -35,7 +35,7 @@ echo 'wait for coredns is READY'
 
 for attempt in {1..60}; do
 	if kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready | grep true | grep '^coredns'; then
-		exit
+		break
 	elif [ "$attempt" -eq 60 ]; then
 		exit 1
 	else
