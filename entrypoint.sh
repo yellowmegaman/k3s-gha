@@ -53,4 +53,4 @@ kubeconfig="${kubeconfig//'%'/'%25'}"
 kubeconfig="${kubeconfig//$'\n'/'%0A'}"
 kubeconfig="${kubeconfig//$'\r'/'%0D'}"
 
-echo "::set-output name=kubeconfig::$kubeconfig)"
+echo "::set-output name=kubeconfig::$kubeconfig"
