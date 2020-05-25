@@ -10,6 +10,9 @@ whoami
 
 docker run -d --name=k3s --privileged --tmpfs /run --tmpfs /var/run -p 6443:6443 -p 80:80 -v "$PWD"/k3s.yaml:/etc/rancher/k3s/k3s.yaml -v "$PWD"/registries.yaml:/etc/rancher/k3s/registries.yaml rancher/k3s:$INPUT_K3S_TAG server
 
+nslookup k3s
+nc -zv k3s 6443
+
 echo 'wait for k3s'
 for attempt in {1..60}; do
 	if kubectl version; then
