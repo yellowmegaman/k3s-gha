@@ -1,6 +1,6 @@
-name: 'GHA k3s'
+name: 'github actions k3s'
 author: 'Dmitry Rozhdestvenskiy <yellowmegaman@gmail.com>'
-description: 'gha k3s'
+description: 'run k3s on github actions'
 branding:
   icon: 'aperture'
   color: 'yellow'
