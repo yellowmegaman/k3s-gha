@@ -10,7 +10,7 @@ inputs:
     required: false
     default: 'v1.17.4-k3s1'
   runner_hostname:
-    description: "action container wan's to know"
+    description: "action container wants to know"
     required: true
   custom_registry:
     description: "whenever to use registries.yaml or not"

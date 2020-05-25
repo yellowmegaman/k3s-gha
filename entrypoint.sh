@@ -2,18 +2,11 @@
 
 export KUBECONFIG=k3s.yaml
 
-echo '#######################'
-echo $INPUT_PARENT_WORKSPACE
-echo '#######################'
+docker run -d --name=k3s --privileged --tmpfs /run --tmpfs /var/run -p 6443:6443 -p 80:80 if [ "$INTPUT_CUSTOM_REGISTRY" = true ]; then echo '--mount "type=bind,src=$INPUT_PARENT_WORKSPACE/registries.yaml,dst=/etc/rancher/k3s/registries.yaml"'; fi rancher/k3s:$INPUT_K3S_TAG server
 
-cp /registries.yaml .
-touch k3s.yaml
+sleep 5
 
-env | sort
-
-docker run -d --name=k3s --privileged --tmpfs /run --tmpfs /var/run -p 6443:6443 -p 80:80 -v "$GITHUB_WORKSPACE"/k3s.yaml:/etc/rancher/k3s/k3s.yaml --mount "type=bind,src=/home/runner/work/actionsfun/actionsfun/registries.yaml,dst=/etc/rancher/k3s/registries.yaml" rancher/k3s:$INPUT_K3S_TAG server
-
-sleep 30
+docker cp k3s:/etc/rancher/k3s/k3s.yaml .
 
 sed -i "s/127.0.0.1/$INPUT_RUNNER_HOSTNAME/g" k3s.yaml
 
