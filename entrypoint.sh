@@ -45,16 +45,7 @@ for attempt in {1..60}; do
 done
 
 
-echo '###########################################'
-cat k3s.yaml
-echo '###########################################'
-
 echo 'get all resources'
 kubectl get all --all-namespaces
 
-kubeconfig=$(cat k3s.yaml)
-kubeconfig="${kubeconfig//'%'/'%25'}"
-kubeconfig="${kubeconfig//$'\n'/'%0A'}"
-kubeconfig="${kubeconfig//$'\r'/'%0D'}"
-
-echo "::set-output name=kubeconfig::$kubeconfig"
+chmod a+r k3s.yaml
