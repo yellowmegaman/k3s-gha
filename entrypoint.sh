@@ -2,6 +2,8 @@
 
 export KUBECONFIG=k3s.yaml
 
+ls
+
 env | sort
 
 touch k3s.yaml
