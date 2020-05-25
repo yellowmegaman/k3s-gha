@@ -12,6 +12,9 @@ inputs:
   runner_hostname:
     description: "action container wan's to know"
     required: true
+  custom_registry:
+    description: "whenever to use registries.yaml or not"
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
