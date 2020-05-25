@@ -17,7 +17,7 @@ inputs:
     required: true
   parent_workspace:
     description: "what value to provide for volumes"
-    required: true
+    required: false
     default: ${{github.workspace}}
 runs:
   using: 'docker'
