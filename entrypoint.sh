@@ -45,6 +45,10 @@ for attempt in {1..60}; do
 done
 
 
+echo '###########################################'
+cat k3s.yaml
+echo '###########################################'
+
 echo 'get all resources'
 kubectl get all --all-namespaces
 
