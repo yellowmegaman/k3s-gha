@@ -1,0 +1,15 @@
+name: 'GHA k3s'
+author: 'Dmitry Rozhdestvenskiy <yellowmegaman@gmail.com>'
+description: 'gha k3s'
+branding:
+  icon: 'aperture'
+  color: ''
+inputs:
+  somshit:
+    description: "som"
+    required: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    GITHUB_TOKEN: ${{inputs.github_token}}
