@@ -48,4 +48,9 @@ done
 echo 'get all resources'
 kubectl get all --all-namespaces
 
-echo "::set-output name=kubeconfig::$(cat k3s.yaml)"
+kubeconfig=$(cat k3s.yaml)
+kubeconfig="${kubeconfig//'%'/'%25'}"
+kubeconfig="${kubeconfig//$'\n'/'%0A'}"
+kubeconfig="${kubeconfig//$'\r'/'%0D'}"
+
+echo "::set-output name=kubeconfig::$kubeconfig)"
