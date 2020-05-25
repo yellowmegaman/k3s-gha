@@ -19,6 +19,9 @@ inputs:
     description: "what value to provide for volumes"
     required: false
     default: ${{github.workspace}}
+outputs:
+  kubeconfig:
+    description: 'k3s kubeconfig'
 runs:
   using: 'docker'
   image: 'Dockerfile'
