@@ -48,5 +48,4 @@ done
 echo 'get all resources'
 kubectl get all --all-namespaces
 
-time=$(date)
-echo "::set-output name=kubeconfig::$time"
+echo "::set-output name=kubeconfig::$(cat k3s.yaml)"
