@@ -14,32 +14,39 @@ sleep 15
 docker cp k3s:/etc/rancher/k3s/k3s.yaml .
 sed -i "s/127.0.0.1/$RUNNER_HOSTNAME/g" k3s.yaml
 
-### 'wait for k3s'
+echo 'wait for k3s'
 for attempt in {1..60}; do
 	if kubectl version; then
 		break;
+	elif [ "$attempt" -eq 120 ]; then
+		echo "timeout reached"
+		exit 1
 	else
 		echo "k3s is not yet up"
 		sleep 3
 	fi
 done
 
-### 'wait for traefik is READY'
+echo 'wait for traefik is READY'
 for attempt in {1..120}; do
 	if kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready | grep true | grep '^traefik'; then
 		break
 	elif [ "$attempt" -eq 120 ]; then
+		echo "timeout reached"
+		kubectl get all --all-namespaces
 		exit 1
 	else
 		sleep 1; echo -n '.'
 	fi
 done
 
-### 'wait for coredns is READY'
+echo 'wait for coredns is READY'
 for attempt in {1..120}; do
 	if kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready | grep true | grep '^coredns'; then
 		break
 	elif [ "$attempt" -eq 120 ]; then
+		echo "timeout reached"
+		kubectl get all --all-namespaces
 		exit 1
 	else
 		sleep 1
@@ -48,7 +55,7 @@ for attempt in {1..120}; do
 done
 
 
-### 'get all resources'
+echo 'get all resources'
 kubectl get all --all-namespaces
 
 chmod a+r k3s.yaml
