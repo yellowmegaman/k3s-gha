@@ -13,6 +13,7 @@ A GitHub Action for running k3s kubernetes cluster
  * parent_workspace - workspace path on runner, obtainer from context, no need to specify anything here, except you know what you're doing
  * kubectl_version
  * install_kubectl - enabled by default, copies kubectl to bin dir in workspace to allow other steps to use kubectl
+ * k3s_arguments - by default set to `--no-deploy=traefik`
 
 ## Required parameters
  * custom_registry - set to 'true' to mount your `registries.yaml` to k3s. This will allow to use private registry mapping in k3s. (set to `false` if you don't have such needs)
