@@ -27,6 +27,10 @@ for attempt in {1..60}; do
 	fi
 done
 
+echo '############################################'
+kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready | grep true | grep '^traefik'
+echo '############################################'
+
 echo 'wait for traefik is READY'
 for attempt in {1..120}; do
 	if kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready | grep true | grep '^traefik'; then
