@@ -57,7 +57,7 @@ chmod a+r k3s.yaml
 ### 'copy kubectl over'
 
 if [ "$INPUT_INSTALL_KUBECTL" = true ]; then
-	mkdir bin
+	mkdir -p bin
 	cp /usr/local/bin/kubectl bin/kubectl
 	chmod a+x bin/kubectl
 	echo "::add-path::$INPUT_PARENT_WORKSPACE/bin"
