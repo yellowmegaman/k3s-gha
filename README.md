@@ -36,7 +36,6 @@ jobs:
       - name: checkout code
         uses: actions/checkout@master
       - name: k3s
-        id: k3s
         uses: yellowmegaman/k3s-gha@master
         with:
           custom_registry: true
