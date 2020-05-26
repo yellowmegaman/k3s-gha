@@ -10,7 +10,6 @@ A GitHub Action for running k3s kubernetes cluster
 
 ## Optional Input parameters
  * k3s_tag - k3s tag to use. (can be found at https://hub.docker.com/r/rancher/k3s/tags)
- * parent_workspace - workspace path on runner, obtainer from context, no need to specify anything here, except you know what you're doing
  * registries_yaml_path - relative path of registries.yaml
  * kubectl_version
  * install_kubectl - enabled by default, copies kubectl to bin dir in workspace to allow other steps to use kubectl
