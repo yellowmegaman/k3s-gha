@@ -8,7 +8,7 @@ chmod +x /usr/local/bin/kubectl
 export KUBECONFIG=k3s.yaml
 export RUNNER_HOSTNAME=$(docker info --format '{{lower .Name}}')
 
-docker run -d --name=k3s --privileged --tmpfs /run --tmpfs /var/run -p 6443:6443 -p 80:80 $(if [ "$INTPUT_CUSTOM_REGISTRY" = true ]; then echo --mount "type=bind,src=$INPUT_PARENT_WORKSPACE/registries.yaml,dst=/etc/rancher/k3s/registries.yaml"; fi) rancher/k3s:$INPUT_K3S_TAG server
+docker run -d --name=k3s --privileged --tmpfs /run --tmpfs /var/run -p 6443:6443 -p 80:80 $(if [ "$INPUT_CUSTOM_REGISTRY" = true ]; then echo --mount "type=bind,src=$INPUT_PARENT_WORKSPACE/registries.yaml,dst=/etc/rancher/k3s/registries.yaml"; fi) rancher/k3s:$INPUT_K3S_TAG server
 
 sleep 15
 
@@ -56,7 +56,7 @@ chmod a+r k3s.yaml
 
 ### 'copy kubectl over'
 
-if [ "$INTPUT_INSTALL_KUBECTL" = true ]; then
+if [ "$INPUT_INSTALL_KUBECTL" = true ]; then
 	mkdir bin
 	cp /usr/local/bin/kubectl bin/kubectl
 	chmod a+x bin/kubectl
