@@ -16,10 +16,6 @@ inputs:
   custom_registry:
     description: "whenever to use registries.yaml in your repo or not"
     required: true
-  parent_workspace:
-    description: "this value is used to mount your registries.yaml file"
-    required: false
-    default: ${{github.workspace}}
   registries_yaml_path:
     description: "where to look for registries.yaml relative path"
     required: false
