@@ -27,25 +27,6 @@ for attempt in {1..60}; do
 	fi
 done
 
-echo '############################################'
-sleep 30 && kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready
-echo '############################################'
-kubectl get all --all-namespaces
-echo '############################################'
-
-echo 'wait for traefik is READY'
-for attempt in {1..120}; do
-	if kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready | grep true | grep '^traefik'; then
-		break
-	elif [ "$attempt" -eq 120 ]; then
-		echo "timeout reached"
-		kubectl get all --all-namespaces
-		exit 1
-	else
-		sleep 1; echo -n '.'
-	fi
-done
-
 echo 'wait for coredns is READY'
 for attempt in {1..120}; do
 	if kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready | grep true | grep '^coredns'; then
