@@ -13,6 +13,10 @@ echo '######################################'
 export KUBECONFIG=k3s.yaml
 export RUNNER_HOSTNAME=$(docker info --format '{{lower .Name}}')
 
+echo '######################################'
+echo docker run -d --name=k3s --privileged --tmpfs /run --tmpfs /var/run -p 6443:6443 -p 80:80 $(if [ "$INPUT_CUSTOM_REGISTRY" = true ]; then echo --mount "type=bind,src=$INPUT_PARENT_WORKSPACE/$INPUT_REGISTRIES_YAML_PATH,dst=/etc/rancher/k3s/registries.yaml"; fi) rancher/k3s:$INPUT_K3S_TAG server "$INPUT_K3S_ARGUMENTS"
+echo '######################################'
+
 docker run -d --name=k3s --privileged --tmpfs /run --tmpfs /var/run -p 6443:6443 -p 80:80 $(if [ "$INPUT_CUSTOM_REGISTRY" = true ]; then echo --mount "type=bind,src=$INPUT_PARENT_WORKSPACE/$INPUT_REGISTRIES_YAML_PATH,dst=/etc/rancher/k3s/registries.yaml"; fi) rancher/k3s:$INPUT_K3S_TAG server "$INPUT_K3S_ARGUMENTS"
 
 sleep 15
