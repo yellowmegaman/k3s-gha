@@ -4,6 +4,12 @@
 curl -L -s --create-dirs https://storage.googleapis.com/kubernetes-release/release/"$INPUT_KUBECTL_VERSION"/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl
 chmod +x /usr/local/bin/kubectl
 
+echo '######################################'
+env | sort
+echo '######################################'
+echo $RUNNER_WORKSPACE
+echo '######################################'
+
 export KUBECONFIG=k3s.yaml
 export RUNNER_HOSTNAME=$(docker info --format '{{lower .Name}}')
 
