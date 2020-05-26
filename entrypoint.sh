@@ -25,10 +25,10 @@ for attempt in {1..60}; do
 done
 
 ### 'wait for traefik is READY'
-for attempt in {1..60}; do
+for attempt in {1..120}; do
 	if kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready | grep true | grep '^traefik'; then
 		break
-	elif [ "$attempt" -eq 60 ]; then
+	elif [ "$attempt" -eq 120 ]; then
 		exit 1
 	else
 		sleep 1; echo -n '.'
@@ -36,10 +36,10 @@ for attempt in {1..60}; do
 done
 
 ### 'wait for coredns is READY'
-for attempt in {1..60}; do
+for attempt in {1..120}; do
 	if kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready | grep true | grep '^coredns'; then
 		break
-	elif [ "$attempt" -eq 60 ]; then
+	elif [ "$attempt" -eq 120 ]; then
 		exit 1
 	else
 		sleep 1
