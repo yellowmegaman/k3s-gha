@@ -30,6 +30,8 @@ done
 echo '############################################'
 sleep 30 && kubectl -n kube-system get pod -o custom-columns=POD:metadata.name,READY:status.containerStatuses[*].ready
 echo '############################################'
+kubectl get all --all-namespaces
+echo '############################################'
 
 echo 'wait for traefik is READY'
 for attempt in {1..120}; do
