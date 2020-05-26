@@ -9,6 +9,10 @@ inputs:
     description: "k3s tag to use"
     required: false
     default: 'v1.17.4-k3s1'
+  k3s_arguments:
+    description: "k3s arguments"
+    required: false
+    default: "--no-deploy=traefik"
   custom_registry:
     description: "whenever to use registries.yaml in your repo or not"
     required: true
