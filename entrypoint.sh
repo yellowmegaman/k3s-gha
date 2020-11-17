@@ -40,5 +40,6 @@ if [ "$INPUT_INSTALL_KUBECTL" = true ]; then
 	mkdir -p bin
 	cp /usr/local/bin/kubectl bin/kubectl
 	chmod a+x bin/kubectl
-	echo "::add-path::$INPUT_PARENT_WORKSPACE/bin"
+	echo "$INPUT_PARENT_WORKSPACE/bin" >> $GITHUB_PATH
+	
 fi
