@@ -8,22 +8,15 @@ inputs:
   k3s_tag:
     description: "k3s tag to use"
     required: false
-    default: 'v1.17.4-k3s1'
+    default: 'v1.21.1+k3s1'
   k3s_arguments:
     description: "k3s arguments"
     required: false
     default: "--no-deploy=traefik"
-  custom_registry:
-    description: "whenever to use registries.yaml in your repo or not"
-    required: true
-  registries_yaml_path:
-    description: "where to look for registries.yaml relative path"
-    required: false
-    default: "registries.yaml"
   kubectl_version:
     description: "kubectl version to use"
     required: false
-    default: "v1.18.1"
+    default: "v1.22.2"
   install_kubectl:
     description: "whenever to copy kubectl to runner workspace"
     required: false
